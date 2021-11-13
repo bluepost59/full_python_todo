@@ -31,7 +31,14 @@
         <button id="new_task_register">登録</button>
     </div>
 
-    <div id="tasks_area" class="tasks_container"></div>
+    <div id="tasks_area" class="tasks_container">
+        {% for mytask in tasks%}
+        <div class="task">
+            <input type="checkbox"></input>
+            <div>{{ mytask }}</div>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 
 </html>

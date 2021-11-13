@@ -34,3 +34,4 @@ def add_task(task_name: str):
 @browser.bind(browser.document["new_task_register"], "click")
 def register_new_task(ev):
     add_task(browser.document["new_task_input"].value)
+    browser.document.getElementById("new_task_input").value = ""
