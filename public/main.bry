@@ -1,3 +1,5 @@
+import json
+
 import browser
 from browser import ajax
 
@@ -13,14 +15,12 @@ taskをタスクリストに追加する
 
 def add_task(task_name: str):
     # POSTする
-
     ajax.post(
-        url="http://localhost:3000/",
+        url="http://localhost:3000/register/",
         headers={"Content-Type": "application/json", },
-        data={"title": task_name, "detail": ""}
+        data=json.dumps({"title": task_name, "detail": "detail"})
     )
 
-    print("Edit DOM")
     # DOM操作
     new_task_checkbox = browser.document.createElement("input")
     new_task_checkbox.type = "checkbox"

@@ -21,20 +21,14 @@ def serve_route():
     return render_template("main.html", tasks=tasks)
 
 
-@app.route("/register", methods=["POST"])
+@app.route("/register/", methods=["POST", ])
 def api_register():
+    print(json.loads(request.data.decode(request.charset)))
     req_data = json.loads(request.data.decode(request.charset))
+    print(req_data)
 
     conn = sqlite3.connect("todo.db")
     cursor = conn.cursor()
-
-    cursor.execute(
-        "create table if not exists todo("
-        "time integer, "
-        "title text,"
-        "detail title"
-        ")"
-    )
 
     cursor.execute(
         "insert into todo values (:time, :title, :detail)",
@@ -51,4 +45,19 @@ def api_register():
 
 
 if __name__ == "__main__":
+
+    # Tableだけ作る
+    conn = sqlite3.connect("todo.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "create table if not exists todo("
+        "time integer, "
+        "title text,"
+        "detail title"
+        ")"
+    )
+    conn.commit()
+    conn.close()
+
     app.run(host="0.0.0.0", debug=True, port=3000, )
