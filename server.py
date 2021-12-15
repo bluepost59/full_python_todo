@@ -10,6 +10,12 @@ app = Flask(__name__, static_folder="public")
 
 @app.route("/")
 def serve_route():
+    conn = sqlite3.connect("todo.db")
+    cursor = conn.cursor()
+
+    cursor.execute("select * from todo")
+    tasks = cursor.fetchall()
+
     return render_template("main.html")
 
 
