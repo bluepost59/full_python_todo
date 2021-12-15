@@ -13,10 +13,12 @@ def serve_route():
     conn = sqlite3.connect("todo.db")
     cursor = conn.cursor()
 
-    cursor.execute("select * from todo")
-    tasks = cursor.fetchall()
+    cursor.execute("select title from todo")
+    raw_tasks = cursor.fetchall()
 
-    return render_template("main.html")
+    tasks = [mytask[0] for mytask in raw_tasks]
+
+    return render_template("main.html", tasks=tasks)
 
 
 @app.route("/register", methods=["POST"])
@@ -39,7 +41,7 @@ def api_register():
         {
             "time": t.time(),
             "title": req_data["title"],
-            "detail": req_data["detail"]
+            "detail": "detail"
         }
     )
 
