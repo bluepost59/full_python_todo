@@ -23,9 +23,7 @@ def serve_route():
 
 @app.route("/register/", methods=["POST", ])
 def api_register():
-    print(json.loads(request.data.decode(request.charset)))
     req_data = json.loads(request.data.decode(request.charset))
-    print(req_data)
 
     conn = sqlite3.connect("todo.db")
     cursor = conn.cursor()
