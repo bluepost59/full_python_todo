@@ -1,4 +1,7 @@
+import json
+
 import browser
+from browser import ajax
 
 browser.console.log("This is brython.")
 
@@ -11,6 +14,14 @@ taskをタスクリストに追加する
 
 
 def add_task(task_name: str):
+    # POSTする
+    ajax.post(
+        url="http://localhost:3000/register/",
+        headers={"Content-Type": "application/json", },
+        data=json.dumps({"title": task_name, "detail": "detail"})
+    )
+
+    # DOM操作
     new_task_checkbox = browser.document.createElement("input")
     new_task_checkbox.type = "checkbox"
 
